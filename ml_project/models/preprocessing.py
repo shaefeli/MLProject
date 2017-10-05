@@ -6,7 +6,7 @@ class Flatten(BaseEstimator, TransformerMixin):
 	def  __init__(self, dim=2):
 		self.dim = dim
 
-	def fit(self, X, y=None)
+	def fit(self, X, y=None):
 		return self
 
 	def transform(self, X, y=None):
