@@ -29,12 +29,12 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         X = check_array(X)
         n_samples, n_features = X.shape
 	
-	maxValue=X.max()
-	X_new =[]
-	for i in range (0,n_samples):
-		brain = X[i,:]
-		counts = np.histogram(brain, maxValue+1, (0,maxValue))
-		X_new.append(counts[0])
+        maxValue=X.max()
+        X_new =[]
+        for i in range (0,n_samples):
+                brain = X[i,:]
+                counts = np.histogram(brain, maxValue+1, (0,maxValue))
+                X_new.append(counts[0])
 
         #X_new = X[:, self.components]
 
