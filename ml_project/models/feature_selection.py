@@ -33,7 +33,7 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         X_new =[]
         for i in range (0,n_samples):
                 brain = X[i,:]
-                counts = np.histogram(brain, maxValue+1, (0,maxValue))
+                counts = np.histogram(brain, maxValue, (1,maxValue))
                 X_new.append(counts[0])
 
         #X_new = X[:, self.components]
