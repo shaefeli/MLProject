@@ -29,7 +29,7 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         X = check_array(X)
         n_samples, n_features = X.shape
 	
-        maxValue=X.max()
+        maxValue=4420
         X_new =[]
         for i in range (0,n_samples):
                 brain = X[i,:]
