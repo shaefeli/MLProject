@@ -5,6 +5,48 @@ from sklearn.utils.random import sample_without_replacement
 import numpy as np
 import sys
 
+class CubeHistogram(BaseEstimator, TransformerMixin):
+    """Histogram of slices"""
+    def __init__(self, cut = 9, nrBins = 45,  random_state=None):
+        self.cut = cut
+        self.random_state = random_state
+        self.nrBins = nrBins
+        
+
+    def fit(self, X, y=None):
+        X = check_array(X)
+        n_samples, n_features = X.shape
+        print("fit")
+        sys.stdout.flush
+        random_state = check_random_state(self.random_state)
+        sys.stdout.flush()
+        return self
+
+    def transform(self, X, y=None):
+        X = check_array(X);
+        sys.stdout.flush()
+        n_samples, n_features = X.shape;
+        images = np.reshape(X, (-1,176,208,176));
+        dimensions = [176,208,176];
+        cut = self.cut
+        cubeX = int(dimensions[0]/cut);
+        #restX = dimensions[0]-cubeX*cut
+        cubeY = int(dimensions[1]/cut);
+        #restY = dimensions[1]-cubeY*cut
+        cubeZ = int(dimensions[2]/cut);
+        #restZ = dimensions[2]-cubeZ*cut
+        sliceW = 100
+        nrBins = self.nrBins
+        X_new = []
+        for i in range(0,n_samples):
+	    for e in range(0,cubeX):
+                for f in range(0,cubeY):
+                    for g in range(0,cubeZ):
+                        counts = np.histogram(images[i, e*cubeX:(e+1)*cubeX, f*cubeY:(f+1)*cubeY, g*cubeZ:(g+1)*cubeZ], nrBins);
+                        X_new = np.hstack([X_new, counts[0]])    
+
+        return np.reshape(X_new,(n_samples,-1))
+
 
 class SliceHistogram(BaseEstimator, TransformerMixin):
     """Histogram of slices"""
