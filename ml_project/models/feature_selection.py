@@ -24,7 +24,7 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
 
         return self
 
-    def transform(self, X, y=None):
+	def transform(self, X, y=None):
 	#check_is_fitted(self, ["components"])
 	X = check_array(X)
 	n_samples, n_features = X.shape
