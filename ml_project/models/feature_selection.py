@@ -5,7 +5,7 @@ from sklearn.utils.random import sample_without_replacement
 import numpy as np
 
 
-class HistogramSlice(BaseEstimator, TransformerMixin):
+class RandomSelection(BaseEstimator, TransformerMixin):
     """Histogram of slices"""
     def __init__(self, n_components=10, random_state=None):
         self.sliceWidth = n_components
