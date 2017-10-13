@@ -3,6 +3,7 @@ from sklearn.utils import check_random_state
 from sklearn.utils.validation import check_array
 from sklearn.utils.random import sample_without_replacement
 import numpy as np
+import sys
 
 
 class SliceHistogram(BaseEstimator, TransformerMixin):
@@ -17,11 +18,13 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
 
         random_state = check_random_state(self.random_state)
         print("coucou")
+        sys.stdout.flush()
         return self
 
     def transform(self, X, y=None):
         X = check_array(X);
         print("start")
+        sys.stdout.flush()
         n_samples, n_features = X.shape;
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
@@ -30,6 +33,7 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
         X_new = []
         for i in range(0,n_samples):
             print(i)
+            sys.stdout.flush()
             for j in range (3):
                 dimensionLength = dimensions[j];
                 startingPoint = 0
