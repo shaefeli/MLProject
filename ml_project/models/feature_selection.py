@@ -11,12 +11,10 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         self.n_components = n_components
 
     def fit(self, X, y=None):
-        X = check_array(X)
-        n_samples, n_features = X.shape
         return self
 
     def transform(self, X, y=None):
-        check_is_fitted(self, ["components"])
+        #check_is_fitted(self, ["components"])
         X = check_array(X)
         n_samples, n_features = X.shape
 	
