@@ -7,8 +7,8 @@ import numpy as np
 
 class HistogramSlice(BaseEstimator, TransformerMixin):
     """Histogram of slices"""
-    def __init__(self, sliceWidth=10, random_state=None):
-        self.sliceWidth = sliceWidth
+    def __init__(self, n_components=10, random_state=None):
+        self.sliceWidth = n_components
         self.random_state = random_state
         #self.components = None
 
