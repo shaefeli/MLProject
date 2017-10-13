@@ -29,7 +29,7 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
         X = check_array(X);
         n_samples, n_features = X.shape;
         
-        images = np.reshape(X, (-1,176,208,176);
+        images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
         sliceWidth = self.sliceWidth;
         nrBins = X.max()-X.min();
