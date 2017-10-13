@@ -26,8 +26,7 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
         sliceW = 100
-        nrBins = X.max()-X.min();
-        print(nrBins)
+        nrBins = 4418; 
         X_new = []
         for i in range(0,n_samples):
             for j in range (3):
