@@ -31,7 +31,7 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
 	
         maxValue=4420
         X_new =[]
-	nrBins = maxValue/sliceWidth
+        nrBins = maxValue/sliceWidth
         for i in range (0,n_samples):
                 brain = X[i,:]
                 counts = np.histogram(brain, nrBins)
