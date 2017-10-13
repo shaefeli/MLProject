@@ -57,4 +57,6 @@ class RandomSelection(BaseEstimator, TransformerMixin):
                     counts = np.histogram(images[i,:,:,toSlice], nrBins);
                     X_new = np.vstack([X_new, counts[0]]);
            
-        return X_new.reshape(X_new.shape[0], -1)
+       print(X_new.shape)
+       print(X_new.reshape(X_new.shape[0], -1))
+       return X_new.reshape(X_new.shape[0], -1)
