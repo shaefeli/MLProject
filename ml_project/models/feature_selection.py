@@ -17,7 +17,7 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
         X = check_array(X)
         n_samples, n_features = X.shape
         print("fit")
-	sys.stdout.flush
+        sys.stdout.flush
         random_state = check_random_state(self.random_state)
         sys.stdout.flush()
         return self
