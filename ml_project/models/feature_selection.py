@@ -31,17 +31,17 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
         
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
-        sliceWidth = self.sliceWidth;
+        sliceW = self.sliceWidth;
         nrBins = X.max()-X.min();
         X_new =[];
-        startingPoint = -sliceWidth;
+        startingPoint = -sliceW;
         endingPoint = 0;
         for j in range(3):
             dimensionLength = dimensions(j);
-            startingPoint += sliceWidth;
+            startingPoint += sliceW;
             if startingPoint>=dimensionLength:
                 break;
-            endingPoint += sliceWidth;
+            endingPoint += sliceW;
             if endingPoint>dimensionLength:
                 endingPoint = dimensionLength;
             toSlice = range(startingPoint,endingPoint);
