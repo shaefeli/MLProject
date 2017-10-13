@@ -48,5 +48,5 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
                     if endingPoint>dimensionLength:
                         endingPoint = dimensionLength;
                     startingPoint += sliceW
-                
+        print("one round done")
         return np.reshape(X_new,(n_samples,-1))
