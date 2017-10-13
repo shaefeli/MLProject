@@ -37,18 +37,18 @@ class RandomSelection(BaseEstimator, TransformerMixin):
                 endingPoint = sliceW
                 while(startingPoint<dimensionLength-1):
                     toSlice = range(startingPoint,endingPoint);
-                        if j==0:
-                            counts = np.histogram(images[i,toSlice,:,:], nrBins);
-                            X_new = np.hstack([X_new, counts[0]])
-                        elif j==1:
-                            counts = np.histogram(images[i,:,toSlice,:], nrBins);
-                            X_new = np.hstack([X_new, counts[0]])
-                        elif j==2:
-                            counts = np.histogram(images[i,:,:,toSlice], nrBins);
-                            X_new = np.hstack([X_new, counts[0]])
-                        endingPoint += sliceW;
-                        if endingPoint>dimensionLength:
-                            endingPoint = dimensionLength;
-                        startingPoint += sliceW
+                    if j==0:
+                        counts = np.histogram(images[i,toSlice,:,:], nrBins);
+                        X_new = np.hstack([X_new, counts[0]])
+                    elif j==1:
+                        counts = np.histogram(images[i,:,toSlice,:], nrBins);
+                        X_new = np.hstack([X_new, counts[0]])
+                    elif j==2:
+                        counts = np.histogram(images[i,:,:,toSlice], nrBins);
+                        X_new = np.hstack([X_new, counts[0]])
+                    endingPoint += sliceW;
+                    if endingPoint>dimensionLength
+                        endingPoint = dimensionLength;
+                    startingPoint += sliceW
                 
         return np.reshape(X_new,(n_samples,-1))
