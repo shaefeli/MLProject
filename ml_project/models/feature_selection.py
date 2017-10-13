@@ -58,5 +58,5 @@ class RandomSelection(BaseEstimator, TransformerMixin):
                     X_new = np.vstack([X_new, counts[0]]);
            
         print(X_new.shape)
-        print(X_new.reshape(X_new.shape[0], -1))
+        print(X_new.reshape(X_new.shape[0], -1).shape)
         return X_new.reshape(X_new.shape[0], -1)
