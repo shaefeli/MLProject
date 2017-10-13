@@ -24,28 +24,35 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         X = check_array(X);
-        sys.stdout.flush()
         n_samples, n_features = X.shape;
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
-        cut = self.cut
+        cut = 9
         cubeX = int(dimensions[0]/cut);
+        print(cubeX)
         #restX = dimensions[0]-cubeX*cut
         cubeY = int(dimensions[1]/cut);
+        print(cubeY)
         #restY = dimensions[1]-cubeY*cut
         cubeZ = int(dimensions[2]/cut);
+        print(cubeZ)
         #restZ = dimensions[2]-cubeZ*cut
-        sliceW = 100
-        nrBins = self.nrBins
-        X_new = []
+        nrBins = 45
+        X_new = np.empty((n_samples,cubeX*cubeY*cubeZ*nrBins))
+        print(X_new.shape)
         for i in range(0,n_samples):
+            print(i)
+            image = images[i,:,:,:]
             for e in range(0,cubeX):
+                region1 = image[e*cubeX:(e+1)*cubeX,:,:]
+                sys.stdout.flush()
                 for f in range(0,cubeY):
+                    region2 = region1[:, f*cubeY:(f+1)*cubeY,:]
                     for g in range(0,cubeZ):
-                        counts = np.histogram(images[i, e*cubeX:(e+1)*cubeX, f*cubeY:(f+1)*cubeY, g*cubeZ:(g+1)*cubeZ], nrBins);
-                        X_new = np.hstack([X_new, counts[0]])    
+                        counts = np.histogram(region2[:,:,g*cubeZ:(g+1)*cubeZ], nrBins);
+                        X_new[i,(g+f*cubeZ+e*cubeY)*nrBins:(g+f*cubeZ+e*cubeY+1)*nrBins]=counts[0]     
 
-        return np.reshape(X_new,(n_samples,-1))
+        return X_new
 
 
 class SliceHistogram(BaseEstimator, TransformerMixin):
