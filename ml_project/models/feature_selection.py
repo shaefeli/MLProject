@@ -17,45 +17,38 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         n_samples, n_features = X.shape
 
         random_state = check_random_state(self.random_state)
-#        self.components = sample_without_replacement(
-#                            n_features,
-#                            self.n_components,
-#                            random_state=random_state)
 
         return self
 
     def transform(self, X, y=None):
-        #check_is_fitted(self, ["components"])
         X = check_array(X);
 
         n_samples, n_features = X.shape;
-
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
-        sliceW = 20
+        sliceW = 100
         nrBins = X.max()-X.min();
-        X_new =np.zeros(nrBins);
-        for j in range(3):
-            dimensionLength = dimensions[j];
-            startingPoint = -sliceW;
-            endingPoint = 0;
-            for i in range (0,n_samples):
-                startingPoint += sliceW;
-                if startingPoint>=dimensionLength:
-                    break;
-                endingPoint += sliceW;
-                if endingPoint>dimensionLength:
-                    endingPoint = dimensionLength;
-                toSlice = range(startingPoint,endingPoint);
-                if j==0:
-                    counts = np.histogram(images[i,toSlice,:,:], nrBins);
-                    X_new = np.vstack([X_new, counts[0]]);
-                elif j==1:
-                    counts = np.histogram(images[i,:,toSlice,:], nrBins);
-                    X_new = np.vstack([X_new, counts[0]]);
-                elif j==2:
-                    counts = np.histogram(images[i,:,:,toSlice], nrBins);
-                    X_new = np.vstack([X_new, counts[0]]);
-           
-        
-        return X_new
+        print(nrBins)
+        X_new = []
+        for i in range(0,n_samples):
+            for j in range (3):
+                dimensionLength = dimensions[j];
+                startingPoint = 0
+                endingPoint = sliceW
+                while(startingPoint<dimensionLength-1):
+                    toSlice = range(startingPoint,endingPoint);
+                        if j==0:
+                            counts = np.histogram(images[i,toSlice,:,:], nrBins);
+                            X_new = np.hstack([X_new, counts[0]])
+                        elif j==1:
+                            counts = np.histogram(images[i,:,toSlice,:], nrBins);
+                            X_new = np.hstack([X_new, counts[0]])
+                        elif j==2:
+                            counts = np.histogram(images[i,:,:,toSlice], nrBins);
+                            X_new = np.hstack([X_new, counts[0]])
+                        endingPoint += sliceW;
+                        if endingPoint>dimensionLength:
+                            endingPoint = dimensionLength;
+                        startingPoint += sliceW
+                
+        return np.reshape(X_new,(n_samples,-1))
