@@ -49,10 +49,10 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
                 if i==0:
                     counts = np.histogram(images[i,toSlice,:,:], nrBins);
                     X_new.append(counts[0]);
-                else if i==1:
+                elif i==1:
                     counts = np.histpgram(images[i,:,toSlice,:], nrBins);
                     X_new.append(counts[0]);
-                else if i==2:
+                elif i==2:
                     counts = np.histpgram(images[i,:,:,toSlice], nrBins);
                     X_new.append(counts[0]);
                              
