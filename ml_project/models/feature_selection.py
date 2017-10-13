@@ -31,6 +31,7 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         n_samples, n_features = X.shape;
 
         images = np.reshape(X, (-1,176,208,176));
+        X = X.reshape(X.shape[0], -1)
         dimensions = [176,208,176];
         sliceW = 20
         nrBins = X.max()-X.min();
