@@ -8,31 +8,30 @@ import sys
 
 class SliceHistogram(BaseEstimator, TransformerMixin):
     """Histogram of slices"""
-    def __init__(self, slice_width=10, random_state=None):
+    def __init__(self, slice_width=10, nrBins = 4000,  random_state=None):
         self.sliceWidth = slice_width
         self.random_state = random_state
+        self.nrBins = nrBins
 
     def fit(self, X, y=None):
         X = check_array(X)
         n_samples, n_features = X.shape
-
+	print("fit")
+	sys.stdout.flush
         random_state = check_random_state(self.random_state)
-        print("coucou")
         sys.stdout.flush()
         return self
 
     def transform(self, X, y=None):
         X = check_array(X);
-        print("start")
         sys.stdout.flush()
         n_samples, n_features = X.shape;
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
         sliceW = 100
-        nrBins = 4418; 
+        nrBins = self.nrBins
         X_new = []
         for i in range(0,n_samples):
-            print(i)
             sys.stdout.flush()
             for j in range (3):
                 dimensionLength = dimensions[j];
