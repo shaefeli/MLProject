@@ -16,12 +16,12 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
         n_samples, n_features = X.shape
 
         random_state = check_random_state(self.random_state)
-
+        print("coucou")
         return self
 
     def transform(self, X, y=None):
         X = check_array(X);
-
+        print("start")
         n_samples, n_features = X.shape;
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
