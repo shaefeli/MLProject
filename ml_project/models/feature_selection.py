@@ -1,16 +1,15 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils import check_random_state
-from sklearn.utils.validation import check_array, check_is_fitted
+from sklearn.utils.validation import check_array
 from sklearn.utils.random import sample_without_replacement
 import numpy as np
 
 
-class RandomSelection(BaseEstimator, TransformerMixin):
+class SliceHistogram(BaseEstimator, TransformerMixin):
     """Histogram of slices"""
-    def __init__(self, n_components=10, random_state=None):
-        self.sliceWidth = n_components
+    def __init__(self, slice_width=10, random_state=None):
+        self.sliceWidth = slice_width
         self.random_state = random_state
-        #self.components = None
 
     def fit(self, X, y=None):
         X = check_array(X)
