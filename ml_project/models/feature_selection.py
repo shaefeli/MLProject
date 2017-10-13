@@ -7,7 +7,7 @@ import numpy as np
 
 class RandomSelection(BaseEstimator, TransformerMixin):
     """Random Selection of features"""
-    def __init__(self, sliceWidth=10, random_state=None):
+    def __init__(self, n_components=1000, random_state=None):
         self.n_components = n_components
         self.random_state = random_state
         self.components = None
@@ -30,11 +30,10 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         n_samples, n_features = X.shape
 	
         maxValue=4420
-	nrBins = maxValue/sliceWidth;
         X_new =[]
         for i in range (0,n_samples):
                 brain = X[i,:]
-                counts = np.histogram(brain, nrBins)
+                counts = np.histogram(brain, maxValue, (1,maxValue))
                 X_new.append(counts[0])
 
         #X_new = X[:, self.components]
