@@ -37,7 +37,7 @@ class RandomSelection(BaseEstimator, TransformerMixin):
         startingPoint = -sliceW;
         endingPoint = 0;
         for j in range(3):
-            dimensionLength = dimensions(j);
+            dimensionLength = dimensions[j];
             startingPoint += sliceW;
             if startingPoint>=dimensionLength:
                 break;
