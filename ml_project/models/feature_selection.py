@@ -29,6 +29,7 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
         nrBins = 4418; 
         X_new = []
         for i in range(0,n_samples):
+            print(i)
             for j in range (3):
                 dimensionLength = dimensions[j];
                 startingPoint = 0
@@ -48,5 +49,4 @@ class SliceHistogram(BaseEstimator, TransformerMixin):
                     if endingPoint>dimensionLength:
                         endingPoint = dimensionLength;
                     startingPoint += sliceW
-        print("one round done")
         return np.reshape(X_new,(n_samples,-1))
