@@ -27,34 +27,34 @@ class RandomSelection(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         #check_is_fitted(self, ["components"])
         X = check_array(X);
+
         n_samples, n_features = X.shape;
-        
+
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
-        sliceW = self.sliceWidth;
+        sliceW = 20
         nrBins = X.max()-X.min();
-        X_new =[];
-        startingPoint = -sliceW;
-        endingPoint = 0;
+        X_new =np.zeros(nrBins);
         for j in range(3):
             dimensionLength = dimensions[j];
-            startingPoint += sliceW;
-            if startingPoint>=dimensionLength:
-                break;
-            endingPoint += sliceW;
-            if endingPoint>dimensionLength:
-                endingPoint = dimensionLength;
-            toSlice = range(startingPoint,endingPoint);
+            startingPoint = -sliceW;
+            endingPoint = 0;
             for i in range (0,n_samples):
-                if i==0:
+                startingPoint += sliceW;
+                if startingPoint>=dimensionLength:
+                    break;
+                endingPoint += sliceW;
+                if endingPoint>dimensionLength:
+                    endingPoint = dimensionLength;
+                toSlice = range(startingPoint,endingPoint);
+                if j==0:
                     counts = np.histogram(images[i,toSlice,:,:], nrBins);
-                    X_new.append(counts[0]);
-                elif i==1:
+                    X_new = np.vstack([X_new, counts[0]]);
+                elif j==1:
                     counts = np.histogram(images[i,:,toSlice,:], nrBins);
-                    X_new.append(counts[0]);
-                elif i==2:
+                    X_new = np.vstack([X_new, counts[0]]);
+                elif j==2:
                     counts = np.histogram(images[i,:,:,toSlice], nrBins);
-                    X_new.append(counts[0]);
-                             
-       
+                    X_new = np.vstack([X_new, counts[0]]);
+           
         return X_new;
