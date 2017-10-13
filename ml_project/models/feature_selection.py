@@ -25,19 +25,36 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
-        #check_is_fitted(self, ["components"])
-        X = check_array(X)
-        n_samples, n_features = X.shape
-	
-        sliceWidth = self.sliceWidth
-        maxValue=4420
-        nrBins = int(maxValue/sliceWidth)
-        X_new =[]
-        for i in range (0,n_samples):
-                brain = X[i,:]
-                counts = np.histogram(brain, nrBins)
-                X_new.append(counts[0])
-
-        #X_new = X[:, self.components]
-
-        return X_new
+	#check_is_fitted(self, ["components"])
+	X = check_array(X)
+	n_samples, n_features = X.shape
+        
+	images = np.reshape(X, (-1,176,208,176)
+	dimensions = [176,208,176]
+	sliceWidth = self.sliceWidth
+	nrBins = X.max()-X.min();
+	X_new =[]
+	startingPoint = -sliceWidth;
+	endingPoint = 0;
+	for j in range(3):
+		dimensionLength = dimensions(j)
+		startingPoint += sliceWidth
+		if startingPoint>=dimensionLength
+			break;
+		endingPoint += sliceWidth
+		if endingPoint>dimensionLength
+			endingPoint = dimensionLength
+		toSlice = range(startingPoint,endingPoint)
+		for i in range (0,n_samples):
+			if i=0
+				counts = np.histogram(images[i,toSlice,:,:], nrBins)
+				X_new.append(counts[0])
+			else if i=1
+				counts = np.histpgram(images[i,:,toSlice,:], nrBins)
+				X_new.append(counts[0])
+			else if i=2
+				counts = np.histpgram(images[i,:,:,toSlice], nrBins)
+				X_new.append(counts[0])
+                     		
+   
+	return X_new
