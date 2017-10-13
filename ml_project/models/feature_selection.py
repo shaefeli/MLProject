@@ -29,19 +29,14 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         dimensions = [176,208,176];
         cut = 9
         cubeX = int(dimensions[0]/cut);
-        print(cubeX)
         #restX = dimensions[0]-cubeX*cut
         cubeY = int(dimensions[1]/cut);
-        print(cubeY)
         #restY = dimensions[1]-cubeY*cut
         cubeZ = int(dimensions[2]/cut);
-        print(cubeZ)
         #restZ = dimensions[2]-cubeZ*cut
         nrBins = 45
         X_new = np.empty((n_samples,cubeX*cubeY*cubeZ*nrBins))
-        print(X_new.shape)
         for i in range(0,n_samples):
-            print(i)
             image = images[i,:,:,:]
             for e in range(0,cubeX):
                 region1 = image[e*cubeX:(e+1)*cubeX,:,:]
