@@ -5,23 +5,29 @@ from sklearn.utils.random import sample_without_replacement
 import numpy as np
 
 
-class HistogramSlices(BaseEstimator, TransformerMixin):
-    """Create histogram out of all image"""
-    def __init__(self, sliceWidth=20, random_state=None):
-        self.sliceWidth = n_components
-        self.random_state = sliceWidth
+class RandomSelection(BaseEstimator, TransformerMixin):
+    """Random Selection of features"""
+    def __init__(self, sliceWidth=10, random_state=None):
+        self.n_components = n_components
+        self.random_state = random_state
+        self.components = None
 
     def fit(self, X, y=None):
         X = check_array(X)
         n_samples, n_features = X.shape
+
         random_state = check_random_state(self.random_state)
+        self.components = sample_without_replacement(
+                            n_features,
+                            self.n_components,
+                            random_state=random_state)
+	
         return self
 
     def transform(self, X, y=None):
         check_is_fitted(self, ["components"])
         X = check_array(X)
         n_samples, n_features = X.shape
-	
 	
         maxValue=4420
 	nrBins = maxValue/sliceWidth;
@@ -31,5 +37,6 @@ class HistogramSlices(BaseEstimator, TransformerMixin):
                 counts = np.histogram(brain, nrBins)
                 X_new.append(counts[0])
 
+        #X_new = X[:, self.components]
 
         return X_new
