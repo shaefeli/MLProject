@@ -50,10 +50,10 @@ class RandomSelection(BaseEstimator, TransformerMixin):
                     counts = np.histogram(images[i,toSlice,:,:], nrBins);
                     X_new.append(counts[0]);
                 elif i==1:
-                    counts = np.histpgram(images[i,:,toSlice,:], nrBins);
+                    counts = np.histogram(images[i,:,toSlice,:], nrBins);
                     X_new.append(counts[0]);
                 elif i==2:
-                    counts = np.histpgram(images[i,:,:,toSlice], nrBins);
+                    counts = np.histogram(images[i,:,:,toSlice], nrBins);
                     X_new.append(counts[0]);
                              
        
