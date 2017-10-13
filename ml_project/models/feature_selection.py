@@ -46,13 +46,13 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
                 endingPoint = dimensionLength;
             toSlice = range(startingPoint,endingPoint);
             for i in range (0,n_samples):
-                if i=0:
+                if i==0:
                     counts = np.histogram(images[i,toSlice,:,:], nrBins);
                     X_new.append(counts[0]);
-                else if i=1:
+                else if i==1:
                     counts = np.histpgram(images[i,:,toSlice,:], nrBins);
                     X_new.append(counts[0]);
-                else if i=2:
+                else if i==2:
                     counts = np.histpgram(images[i,:,:,toSlice], nrBins);
                     X_new.append(counts[0]);
                              
