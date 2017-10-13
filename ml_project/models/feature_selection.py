@@ -47,7 +47,7 @@ class RandomSelection(BaseEstimator, TransformerMixin):
                         counts = np.histogram(images[i,:,:,toSlice], nrBins);
                         X_new = np.hstack([X_new, counts[0]])
                     endingPoint += sliceW;
-                    if endingPoint>dimensionLength
+                    if endingPoint>dimensionLength:
                         endingPoint = dimensionLength;
                     startingPoint += sliceW
                 
