@@ -6,7 +6,7 @@ import numpy as np
 
 
 class HistogramSlice(BaseEstimator, TransformerMixin):
-    """Histogram of each slice"""
+    """Histogram of slices"""
     def __init__(self, sliceWidth=10, random_state=None):
         self.sliceWidth = sliceWidth
         self.random_state = random_state
@@ -21,7 +21,7 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
 #                            n_features,
 #                            self.n_components,
 #                            random_state=random_state)
-	
+
         return self
 
     def transform(self, X, y=None):
@@ -29,9 +29,10 @@ class HistogramSlice(BaseEstimator, TransformerMixin):
         X = check_array(X)
         n_samples, n_features = X.shape
 	
+        sliceWidth = self.sliceWidth
         maxValue=4420
-        X_new =[]
         nrBins = maxValue/sliceWidth
+        X_new =[]
         for i in range (0,n_samples):
                 brain = X[i,:]
                 counts = np.histogram(brain, nrBins)
