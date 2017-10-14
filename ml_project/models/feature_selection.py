@@ -34,8 +34,6 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         X_new = np.empty((n_samples,cut*cut*cut*nrBins))
         for i in range(0,n_samples):
             image = images[i,:,:,:]
-            image = np.extract(image>50,image)
-            image = np.extract(image<1850,image)
             for e in range(0,cut):
                 for f in range(0,cut):
                     for g in range(0,cut):
