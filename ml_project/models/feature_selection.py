@@ -41,8 +41,7 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
                         img = image[e*cubeX:(e+1)*cubeX,f*cubeY:(f+1)*cubeY,g*cubeZ:(g+1)*cubeZ]
                         counts = np.histogram(img, nrBins);
                         X_new[i,(g+f*cut+e*cut*cut)*nrBins:(g+f*cut+e*cut*cut+1)*nrBins]=counts[0]     
-
-       return X_new
+        return X_new
 
 
 class SliceHistogram(BaseEstimator, TransformerMixin):
