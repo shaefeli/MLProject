@@ -33,7 +33,7 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         cubeZ = int(dimensions[2]/cut);
         nrBins = 45
         X_new = np.empty((n_samples,cut*cut*cut*nrBins))
-        for i in range(0,n_samples):)
+        for i in range(0,n_samples):
             image = images[i,:,:,:]
             for e in range(0,cut):
                 for f in range(0,cut):
