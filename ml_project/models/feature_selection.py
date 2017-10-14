@@ -17,9 +17,8 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         X = check_array(X)
         n_samples, n_features = X.shape
         print("fit")
-        sys.stdout.flush
-        random_state = check_random_state(self.random_state)
         sys.stdout.flush()
+        random_state = check_random_state(self.random_state)
         return self
 
     def transform(self, X, y=None):
@@ -27,11 +26,11 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         n_samples, n_features = X.shape;
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
-        cut = 9
+        cut = self.cut
         cubeX = int(dimensions[0]/cut);
         cubeY = int(dimensions[1]/cut);
         cubeZ = int(dimensions[2]/cut);
-        nrBins = 45
+        nrBins = self.nrBins
         X_new = np.empty((n_samples,cut*cut*cut*nrBins))
         for i in range(0,n_samples):
             image = images[i,:,:,:]
