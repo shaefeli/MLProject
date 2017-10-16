@@ -66,9 +66,9 @@ class CubeHistogramDim(BaseEstimator, TransformerMixin):
         images = np.reshape(X, (-1,176,208,176));
         dimensions = [176,208,176];
         dimension = self.dimension
-	cutX = int(dimensions[0]/dimension);
-	cutY = int(dimensions[1]/dimension);
-	cutZ = int(dimensions[2]/dimension);
+        cutX = int(dimensions[0]/dimension);
+        cutY = int(dimensions[1]/dimension);
+        cutZ = int(dimensions[2]/dimension);
         nrBins = self.nrBins
         X_new = np.empty((n_samples,cutX*cutY*cutZ*nrBins))
         for i in range(0,n_samples):
