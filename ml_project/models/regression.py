@@ -6,7 +6,7 @@ import numpy as np
 class RidgeWithPost(BaseEstimator,TransformerMixin):
     def __init__(self, weight=1.0):
         self.ridge = RidgeCV(weight)
-    def fit(self,X,y):
+    def fit(self,X,y, sample_weight=None):
         self.ridge.fit(X,y)
         return self;
     def predict(self,X):
@@ -19,7 +19,7 @@ class RidgeWithPost(BaseEstimator,TransformerMixin):
                 ranged[i] = y[i];
         print(ranged)
         return ranged
-    def score(self,X,y):
+    def score(self,X,y, sample_weight=None):
         return self.ridge.score(X,y)
 	
 
