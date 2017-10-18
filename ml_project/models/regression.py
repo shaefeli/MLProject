@@ -1,6 +1,7 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.linear_model import RidgeCV
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
+import numpy as np
 
 class RidgeWithPost(BaseEstimator,TransformerMixin):
     def __init__(self, weight=1.0):
@@ -10,8 +11,12 @@ class RidgeWithPost(BaseEstimator,TransformerMixin):
         return self;
     def predict(self,X):
         y = self.ridge.predict(X)
-        print(y)
-        ranged = map(lambda yi: 18 if yi<18 else yi,y)
+        ranged = np.empty(len(y))
+        for i in range(0,len(y)):
+            if y[i]<18:
+                ranged[i] = 18;
+            else:
+                ranged[i] = y[i];
         print(ranged)
         return ranged
 	
