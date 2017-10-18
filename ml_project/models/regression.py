@@ -10,7 +10,7 @@ class RidgeWithPost(BaseEstimator,TransformerMixin):
         return self;
     def predict(self,X):
         y = self.ridge.predict(X)
-        print y
+        print(y)
         return y
         #ranged = map(lambda yi: 18 if yi<18 else yi,y)
         #return ranged
