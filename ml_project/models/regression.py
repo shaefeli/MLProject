@@ -4,7 +4,7 @@ from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 
 class RidgeWithPost(BaseEstimator,TransformerMixin):
     def __init__(self, weight=1.0):
-        self.ridge = RidgeCV(alpha=1.0)
+        self.ridge = RidgeCV(1.0)
     def fit(self,X,y):
         self.ridge.fit(X,y)
         return self;
