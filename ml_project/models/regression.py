@@ -1,29 +1,30 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.linear_model import RidgeCV
-from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 import numpy as np
 
-class RidgeWithPost(BaseEstimator,TransformerMixin):
+
+class RidgeWithPost(BaseEstimator, TransformerMixin):
     def __init__(self, weight=1.0):
         self.ridge = RidgeCV(weight)
-    def fit(self,X,y, sample_weight=None):
-        self.ridge.fit(X,y)
-        return self;
-    def predict(self,X):
+
+    def fit(self, X, y, sample_weight=None):
+        self.ridge.fit(X, y)
+        return self
+
+    def predict(self, X):
         y = self.ridge.predict(X)
         ranged = np.empty(len(y))
-        for i in range(0,len(y)):
-            if y[i]<18:
-                ranged[i] = 18;
+        for i in range(0, len(y)):
+            if y[i] < 18:
+                ranged[i] = 18
             else:
-                ranged[i] = y[i];
-        print(ranged)
+                ranged[i] = y[i]
         return ranged
-    def score(self,X,y, sample_weight=None):
-        return self.ridge.score(X,y)
-	
 
-#class KernelEstimator(skl.base.BaseEstimator, skl.base.TransformerMixin):
+    def score(self, X, y, sample_weight=None):
+        return self.ridge.score(X, y)
+
+# class KernelEstimator(skl.base.BaseEstimator, skl.base.TransformerMixin):
 #    """docstring"""
 #    def __init__(self, save_path=None):
 #        super(KernelEstimator, self).__init__()
