@@ -19,6 +19,8 @@ class RidgeWithPost(BaseEstimator,TransformerMixin):
                 ranged[i] = y[i];
         print(ranged)
         return ranged
+    def score(self,X,y):
+        return self.ridge.score(X,y)
 	
 
 #class KernelEstimator(skl.base.BaseEstimator, skl.base.TransformerMixin):
