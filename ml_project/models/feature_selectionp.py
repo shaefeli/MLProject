@@ -252,8 +252,9 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         X = check_array(X)
         n_samples, n_features = X.shape
         brainCollection = np.reshape(X, (-1, 176, 208, 176))
+        print("hello");
         features = self.totalBrainsFeature(brainCollection,True)
-
+        print("hello2");
         return features
 
 
