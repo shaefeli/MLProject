@@ -251,6 +251,8 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         print(stringa)
         brainCollection = np.reshape(X, (-1, 176, 208, 176))
         self.features = self.totalBrainsFeature(brainCollection,True)
+        print("Features in fit:")
+        print(self.features)
         print ("fine fit")
         return self
 
@@ -260,6 +262,8 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         stringa = self.foo('ciao transform')
         print(stringa,flush=True)
         X_new = self.features
+        print("Features in transform:")
+        print(X_new)
         return X_new
 
 class NonZeroSelection(BaseEstimator, TransformerMixin):
