@@ -263,7 +263,7 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         print(stringa,flush=True)
         X_new = self.features
         print("Features in transform:")
-        print(X_new)
+        print(X_new, flush = True)
         return X_new
 
 class NonZeroSelection(BaseEstimator, TransformerMixin):
