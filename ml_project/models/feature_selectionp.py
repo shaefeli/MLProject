@@ -17,7 +17,7 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         self.MINIMUM_TEST = MINIMUM_TEST
         self.pixelThreshold = pixelThreshold
         self.nrOfBin = nrOfBin
-	print("fdsa")
+        print("fdsa")
         sys.stdout.flush()
 
     def findCoordinates(self,image):
