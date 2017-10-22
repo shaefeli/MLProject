@@ -65,7 +65,7 @@ class KernelEstimator(skl.base.BaseEstimator, skl.base.TransformerMixin):
 
 
 class RidgeWithPost(BaseException, TransformerMixin):
-    def __init__(self, weight):
+    def __init__(self, weight=1.0):
         self.ridge = RidgeCV(weight)
 
     def fit(self, X, y, sample_weight = None):
