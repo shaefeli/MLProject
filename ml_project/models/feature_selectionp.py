@@ -5,6 +5,7 @@ from sklearn.utils.random import sample_without_replacement
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_array, check_is_fitted
 import numpy as np
+import sys
 
 
 class SlidingWindowSelection(BaseEstimator, TransformerMixin):
@@ -16,6 +17,8 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         self.MINIMUM_TEST = MINIMUM_TEST
         self.pixelThreshold = pixelThreshold
         self.nrOfBin = nrOfBin
+	print("fdsa")
+        sys.stdout.flush()
 
     def findCoordinates(self,image):
 
@@ -253,8 +256,10 @@ class SlidingWindowSelection(BaseEstimator, TransformerMixin):
         n_samples, n_features = X.shape
         brainCollection = np.reshape(X, (-1, 176, 208, 176))
         print("hello");
+        sys.stdout.flush()
         features = self.totalBrainsFeature(brainCollection,True)
         print("hello2");
+        sys.stdout.flush()
         return features
 
 
