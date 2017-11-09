@@ -3,11 +3,34 @@ from sklearn.utils.validation import check_array
 import numpy as np
 
 
+<<<<<<< HEAD
 class CubeHistogram(BaseEstimator, TransformerMixin):
     """Histogram of cubes"""
     def __init__(self, cut=9, nrBins=45):
         self.cut = cut
         self.nrBins = nrBins
+=======
+class NonZeroSelection(BaseEstimator, TransformerMixin):
+    """Select non-zero voxels"""
+    def fit(self, X, y=None):
+        X = check_array(X)
+        self.nonzero = X.sum(axis=0) > 0
+
+        return self
+
+    def transform(self, X, y=None):
+        check_is_fitted(self, ["nonzero"])
+        X = check_array(X)
+        return X[:, self.nonzero]
+
+
+class RandomSelection(BaseEstimator, TransformerMixin):
+    """Random Selection of features"""
+    def __init__(self, n_components=1000, random_state=None):
+        self.n_components = n_components
+        self.random_state = random_state
+        self.components = None
+>>>>>>> d1626cec09d06b9299ad3953ceb71005d278d917
 
     def fit(self, X, y=None):
         X = check_array(X)
