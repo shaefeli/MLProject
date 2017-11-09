@@ -2,6 +2,7 @@
 *.tar
 *.npy
 __pycache__/
+.smt/
 .kaggle-cli/
 data/
 .config.yaml\n.smt/
