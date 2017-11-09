@@ -1,0 +1,13 @@
+module: ml_project.pipeline
+class: Pipeline
+params:
+  class_list:
+    - module: ml_project.models.feature_selection
+      class: CubeHistogram
+      params:
+        cut: 15
+        nrBins: 45
+    - module: sklearn.discriminant_analysis
+      class: LinearDiscriminantAnalysis
+
+
