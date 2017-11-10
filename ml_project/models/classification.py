@@ -72,7 +72,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
             sys.stdout.flush();
             classifs[i]=LinearDiscriminantAnalysis();
         self.classifiers = classifs
-        print(endInit)
+        print("endInit")
         sys.stdout.flush();
 
     def maxIndexWithSampling(y):
