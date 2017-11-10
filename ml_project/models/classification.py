@@ -22,11 +22,11 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         return chosenIndices
 
     def maxIndex(y):
-        y_new = np.empty((y.shape[0],1))
+        y_n = np.empty((y.shape[0],1))
         for i in range(0,y.shape[0]):
             maxYIndex = np.argmax(y[i])
-            y_new[i] = maxYIndex
-        return y_new
+            y_n[i] = maxYIndex
+        return y_n
 
     def fit(self, X, y, sample_weight=None):
         #transform y by just taking the max label
