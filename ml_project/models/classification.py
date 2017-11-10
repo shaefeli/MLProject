@@ -10,10 +10,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y, sample_weight=None):
         #transform y by just taking the max label
-        y_new = np.empty((y.shape[0],1))
-        for i in range(0,y.shape[0]):
-            maxYIndex = np.argmax(y[i])
-            y_new[i] = maxYIndex
+        y_new = maxIndex(y)
         self.lda.fit(X, y_new)
         return self
 
@@ -22,6 +19,26 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
 
     def predict_proba(self, X):
         return self.lda.predict_proba(X)
+    
+    def maxIndex(y):
+        y_new = np.empty((y.shape[0],1))
+        for i in range(0,y.shape[0]):
+            maxYIndex = np.argmax(y[i])
+            y_new[i] = maxYIndex
+        return y_new
+
+    def maxIndexWithSampling(y):
+        chosenIndices = np.empty((y.shape[0],1))
+        for i in range(0,y.shape[0]):
+            rand = random.random()
+            rowY = y[i]
+            cumSum = 0;
+            for j in range(0,rowY.shape[0]):
+                cumSum += rowY[j]
+                if rand<cumSum:
+                chosenIndices[i] = j
+                break
+        return chosenIndices
 
 class MeanPredictor(BaseEstimator, TransformerMixin):
     """docstring for MeanPredictor"""
