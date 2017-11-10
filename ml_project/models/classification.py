@@ -63,7 +63,7 @@ from scipy import stats
 import random
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
-    def __init__(self,nrClassifiers=1):
+    def __init__(self,nrClassifiers=100):
         self.nrClassifiers=nrClassifiers
         classifs = np.empty(nrClassifiers,dtype = LinearDiscriminantAnalysis);
         for i in range(0,nrClassifiers):
@@ -104,6 +104,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                     if rand<cumSum:
                         chosenIndices[i] = j
                         break
+            np.ravel(chosenIndices)
             ldaToFit = self.classifiers[e]
             ldaToFit.fit(X, chosenIndices)
         return self
@@ -115,7 +116,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         y=np.empty((X.shape[0],4));
         for e in range(0,self.nrClassifiers):
             y = y + self.classifiers[e].predict_proba(X)
-        return y/X.shape[0];
+        return y/self.nrClassifiers;
     
 
 
