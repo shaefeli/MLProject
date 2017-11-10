@@ -104,7 +104,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                     if rand<cumSum:
                         chosenIndices[i] = j
                         break
-            ldaToFit = self.classifiers[e])
+            ldaToFit = self.classifiers[e]
             ldaToFit.fit(X, chosenIndices)
         return self
 
