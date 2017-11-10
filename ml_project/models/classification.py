@@ -104,8 +104,8 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                     if rand<cumSum:
                         chosenIndices[i] = j
                         break
-            print(self.classifiers[e])
-            self.classifiers[e].fit(X, chosenIndices)
+            ldaToFit = self.classifiers[e])
+            ldaToFit.fit(X, chosenIndices)
         return self
 
     def score(self, X, y, sample_weight=None):
