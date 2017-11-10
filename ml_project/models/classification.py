@@ -3,6 +3,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_array, check_is_fitted
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from scipy import stats
+import random
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self):
