@@ -64,7 +64,7 @@ import random
 import sys
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
-    def __init__(self,nrClassifiers=100):
+    def __init__(self,nrClassifiers=50):
         self.nrClassifiers=nrClassifiers
         classifs = np.empty(nrClassifiers,dtype = LinearDiscriminantAnalysis);
         for i in range(0,nrClassifiers):
