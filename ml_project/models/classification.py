@@ -6,8 +6,12 @@ from scipy import stats
 import random
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        self.lda = LinearDiscriminantAnalysis();
+    def __init__(self,nrClassifiers=1):
+        self.nrClassifiers=nrClassifiers
+        classifs = np.empty((nrClassifiers,1));
+        for i in range(0,nrClassifiers):
+            classifs[i]=LinearDiscriminantAnalysis();
+        self.classifiers = classifs
 
     def maxIndexWithSampling(y):
         chosenIndices = np.empty((y.shape[0],1))
@@ -29,25 +33,30 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
             y_n[i] = maxYIndex
         return y_n
 
+
     def fit(self, X, y, sample_weight=None):
-        chosenIndices = np.empty((y.shape[0],1))
-        for i in range(0,y.shape[0]):
-            rand = random.random()
-            rowY = y[i]
-            cumSum = 0;
-            for j in range(0,rowY.shape[0]):
-                cumSum += rowY[j]
-                if rand<cumSum:
-                    chosenIndices[i] = j
-                    break
-        self.lda.fit(X, chosenIndices)
+        for e in range(0,self.nrClassifiers):
+            chosenIndices = np.empty((y.shape[0],1))
+            for i in range(0,y.shape[0]):
+                rand = random.random()
+                rowY = y[i]
+                cumSum = 0;
+                for j in range(0,rowY.shape[0]):
+                    cumSum += rowY[j]
+                    if rand<cumSum:
+                        chosenIndices[i] = j
+                        break
+            self.classifiers[e].fit(X, chosenIndices)
         return self
 
     def score(self, X, y, sample_weight=None):
         return stats.spearmanr(y)
 
     def predict_proba(self, X):
-        return self.lda.predict_proba(X)
+        y=np.empty((X.shape[0],4));
+        for e in range(0,self.nrClassifiers):
+            y = y + self.classifiers[e].predict_proba(X)
+        return y/X.shape[0];
     
 
 
