@@ -29,8 +29,17 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         return y_n
 
     def fit(self, X, y, sample_weight=None):
-        y_new = maxIndexWithSampling(y)
-        self.lda.fit(X, y_new)
+        chosenIndices = np.empty((y.shape[0],1))
+        for i in range(0,y.shape[0]):
+            rand = random.random()
+            rowY = y[i]
+            cumSum = 0;
+            for j in range(0,rowY.shape[0]):
+                cumSum += rowY[j]
+                if rand<cumSum:
+                    chosenIndices[i] = j
+                    break
+        self.lda.fit(X, chosenIndices)
         return self
 
     def score(self, X, y, sample_weight=None):
