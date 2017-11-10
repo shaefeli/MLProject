@@ -105,6 +105,8 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                         chosenIndices[i] = j
                         break
             ldaToFit = self.classifiers[e]
+            print(ldaToFit)
+            ldatoFit.fit
             ldaToFit.fit(X, chosenIndices)
         return self
 
