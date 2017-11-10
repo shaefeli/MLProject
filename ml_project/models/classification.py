@@ -65,7 +65,7 @@ import random
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self,nrClassifiers=1):
         self.nrClassifiers=nrClassifiers
-        classifs = np.empty((nrClassifiers,1),dtype = LinearDiscriminantAnalysis);
+        classifs = np.empty(nrClassifiers,dtype = LinearDiscriminantAnalysis);
         for i in range(0,nrClassifiers):
             classifs[i]=LinearDiscriminantAnalysis();
         self.classifiers = classifs
@@ -105,8 +105,6 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                         chosenIndices[i] = j
                         break
             ldaToFit = self.classifiers[e]
-            print(ldaToFit)
-            ldaToFit.fit
             ldaToFit.fit(X, chosenIndices)
         return self
 
