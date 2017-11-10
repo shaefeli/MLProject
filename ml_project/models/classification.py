@@ -36,8 +36,8 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
             for j in range(0,rowY.shape[0]):
                 cumSum += rowY[j]
                 if rand<cumSum:
-                chosenIndices[i] = j
-                break
+                    chosenIndices[i] = j
+                    break
         return chosenIndices
 
 class MeanPredictor(BaseEstimator, TransformerMixin):
