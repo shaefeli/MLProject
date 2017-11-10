@@ -92,6 +92,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
 
 
     def fit(self, X, y, sample_weight=None):
+        print("START FITTING")
         for e in range(0,self.nrClassifiers):
             chosenIndices = np.empty((y.shape[0],1))
             for i in range(0,y.shape[0]):
@@ -103,6 +104,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                     if rand<cumSum:
                         chosenIndices[i] = j
                         break
+            print(self.classifiers[e])
             self.classifiers[e].fit(X, chosenIndices)
         return self
 
