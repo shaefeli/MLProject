@@ -8,18 +8,6 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self):
         self.lda = LinearDiscriminantAnalysis();
 
-    def fit(self, X, y, sample_weight=None):
-        #transform y by just taking the max label
-        y_new = maxIndex(y)
-        self.lda.fit(X, y_new)
-        return self
-
-    def score(self, X, y, sample_weight=None):
-        return stats.spearmanr(y)
-
-    def predict_proba(self, X):
-        return self.lda.predict_proba(X)
-    
     def maxIndex(y):
         y_new = np.empty((y.shape[0],1))
         for i in range(0,y.shape[0]):
@@ -39,6 +27,20 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                     chosenIndices[i] = j
                     break
         return chosenIndices
+
+    def fit(self, X, y, sample_weight=None):
+        #transform y by just taking the max label
+        y_new = maxIndex(y)
+        self.lda.fit(X, y_new)
+        return self
+
+    def score(self, X, y, sample_weight=None):
+        return stats.spearmanr(y)
+
+    def predict_proba(self, X):
+        return self.lda.predict_proba(X)
+    
+
 
 class MeanPredictor(BaseEstimator, TransformerMixin):
     """docstring for MeanPredictor"""
