@@ -8,13 +8,6 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self):
         self.lda = LinearDiscriminantAnalysis();
 
-    def maxIndex(y):
-        y_new = np.empty((y.shape[0],1))
-        for i in range(0,y.shape[0]):
-            maxYIndex = np.argmax(y[i])
-            y_new[i] = maxYIndex
-        return y_new
-
     def maxIndexWithSampling(y):
         chosenIndices = np.empty((y.shape[0],1))
         for i in range(0,y.shape[0]):
@@ -27,6 +20,13 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                     chosenIndices[i] = j
                     break
         return chosenIndices
+
+    def maxIndex(y):
+        y_new = np.empty((y.shape[0],1))
+        for i in range(0,y.shape[0]):
+            maxYIndex = np.argmax(y[i])
+            y_new[i] = maxYIndex
+        return y_new
 
     def fit(self, X, y, sample_weight=None):
         #transform y by just taking the max label
