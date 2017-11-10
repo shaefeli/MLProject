@@ -1,6 +1,7 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_array
 import numpy as np
+import sys
 
 class CubeHistogram(BaseEstimator, TransformerMixin):
     """Histogram of cubes"""
@@ -15,6 +16,8 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        print("START TRANSFORM FEAT SEL")
+        sys.stdout.flush()
         X = check_array(X)
         n_samples, n_features = X.shape
         images = np.reshape(X, (-1, 176, 208, 176))
@@ -26,6 +29,8 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         nrBins = self.nrBins
         X_new = np.empty((n_samples, cut*cut*cut*nrBins))
         for i in range(0, n_samples):
+            print(i)
+            sys.stdout.flush()
             image = images[i, :, :, :]
             for e in range(0, cut):
                 for f in range(0, cut):
