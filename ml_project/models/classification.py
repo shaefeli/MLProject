@@ -61,14 +61,19 @@ from sklearn.utils.validation import check_array, check_is_fitted
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from scipy import stats
 import random
+import sys
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self,nrClassifiers=100):
         self.nrClassifiers=nrClassifiers
         classifs = np.empty(nrClassifiers,dtype = LinearDiscriminantAnalysis);
         for i in range(0,nrClassifiers):
+            print(i);
+            sys.stdout.flush();
             classifs[i]=LinearDiscriminantAnalysis();
         self.classifiers = classifs
+        print(endInit)
+        sys.stdout.flush();
 
     def maxIndexWithSampling(y):
         chosenIndices = np.empty((y.shape[0],1))
@@ -93,6 +98,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y, sample_weight=None):
         print("START FITTING")
+        sys.stdout.flush();
         for e in range(0,self.nrClassifiers):
             chosenIndices = np.empty((y.shape[0],1))
             for i in range(0,y.shape[0]):
@@ -105,6 +111,8 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                         chosenIndices[i] = j
                         break
             np.ravel(chosenIndices)
+            print(e)
+            sys.stdout.flush();
             ldaToFit = self.classifiers[e]
             ldaToFit.fit(X, chosenIndices)
         return self
