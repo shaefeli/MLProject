@@ -7,7 +7,7 @@ params:
       params:
         cut: 15
         nrBins: 45
-    - module: sklearn.discriminant_analysis
-      class: LinearDiscriminantAnalysis
+    - module: ml_project.models.classification
+      class: LDAwithYHandling
 
 
