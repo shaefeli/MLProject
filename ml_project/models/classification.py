@@ -29,7 +29,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         return y_n
 
     def fit(self, X, y, sample_weight=None):
-        y_new = maxIndex(y)
+        y_new = maxIndexWithSampling(y)
         self.lda.fit(X, y_new)
         return self
 
