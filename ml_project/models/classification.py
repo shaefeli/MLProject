@@ -20,6 +20,9 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def score(self, X, y, sample_weight=None):
         return stats.spearmanr(y)
 
+    def predict_proba(self, X):
+        return self.lda.predict_proba(X)
+
 class MeanPredictor(BaseEstimator, TransformerMixin):
     """docstring for MeanPredictor"""
     def fit(self, X, y):
