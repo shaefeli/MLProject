@@ -9,7 +9,9 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y, sample_weight=None):
         #transform y by just taking the max label
+        print(y.shape)
         y_new = np.empty((y.shape[0],1))
+        print(y_new.shape)
         for i in range(0,y.shape[0]):
             maxYIndex = np.argmax(y[i])
             y_new[i] = maxYIndex
