@@ -64,16 +64,8 @@ import random
 import sys
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
-    def __init__(self,nrClassifiers=1000):
-        self.nrClassifiers=nrClassifiers
-        classifs = np.empty(nrClassifiers,dtype = LinearDiscriminantAnalysis);
-        for i in range(0,nrClassifiers):
-            print(i);
-            sys.stdout.flush();
-            classifs[i]=LinearDiscriminantAnalysis();
-        self.classifiers = classifs
-        print("endInit")
-        sys.stdout.flush();
+    def __init__(self):
+        self.lda=LinearDiscriminantAnalysis()
 
     def maxIndexWithSampling(y):
         chosenIndices = np.empty((y.shape[0],1))
@@ -99,31 +91,12 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def fit(self, X, y, sample_weight=None):
         print("START FITTING")
         sys.stdout.flush();
-        for e in range(0,self.nrClassifiers):
-            chosenIndices = np.empty((y.shape[0],1))
-            for i in range(0,y.shape[0]):
-                rand = random.random()
-                rowY = y[i]
-                cumSum = 0;
-                for j in range(0,rowY.shape[0]):
-                    cumSum += rowY[j]
-                    if rand<cumSum:
-                        chosenIndices[i] = j
-                        break
-            np.ravel(chosenIndices)
-            print(e)
-            sys.stdout.flush();
-            ldaToFit = self.classifiers[e]
-            ldaToFit.fit(X, chosenIndices)
+        chosenIndices = argmax(y)
+        self.lda.fit(X, chosenIndices)
         return self
 
     def score(self, X, y, sample_weight=None):
-        y_p=np.empty((X.shape[0],4));
-        for e in range(0,self.nrClassifiers):
-            predicted = self.classifiers[e].predict_proba(X)
-            y_p = y + predicted
-        y_p = y_p/self.nrClassifiers;
-	
+	y[p] = self.predict_proba(X)
         n_samples=X.shape[0]
         correl=0
         for i in range(0,n_samples):
@@ -132,11 +105,8 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         return correl/n_samples
 
     def predict_proba(self, X):
-        y=np.empty((X.shape[0],4));
-        for e in range(0,self.nrClassifiers):
-            predicted = self.classifiers[e].predict_proba(X)
-            y = y + predicted
-        return y/self.nrClassifiers;
+        return self.lda.predict_proba(X)
+
     
 
 
