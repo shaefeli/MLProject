@@ -96,7 +96,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         return self
 
     def score(self, X, y, sample_weight=None):
-	y[p] = self.predict_proba(X)
+        y[p] = self.predict_proba(X)
         n_samples=X.shape[0]
         correl=0
         for i in range(0,n_samples):
