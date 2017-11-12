@@ -126,7 +126,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
 	
         n_samples=X.shape[0]
         correl=0
-        for i in range(0,n_samples)
+        for i in range(0,n_samples):
             correla,_=stats.spearmanr(y[i],y_p[i])
             correl = correl+correla
         return correl/nr_samples
