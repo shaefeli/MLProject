@@ -5,9 +5,10 @@ import sys
 
 class CubeHistogram(BaseEstimator, TransformerMixin):
     """Histogram of cubes"""
-    def __init__(self, cut=9, nrBins=45):
+    def __init__(self, cut=9, nrBins=45, maxH=2000):
         self.cut = cut
         self.nrBins = nrBins
+        self.maxH = maxH
 
 
     def fit(self, X, y=None):
@@ -26,6 +27,7 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
         cubeX = int(dimensions[0]/cut)
         cubeY = int(dimensions[1]/cut)
         cubeZ = int(dimensions[2]/cut)
+        rangeH = (0,self.maxH)
         nrBins = self.nrBins
         X_new = np.empty((n_samples, cut*cut*cut*nrBins))
         for i in range(0, n_samples):
@@ -37,7 +39,7 @@ class CubeHistogram(BaseEstimator, TransformerMixin):
                     for g in range(0, cut):
                         img = image[e*cubeX:(e+1)*cubeX, f*cubeY:(f+1)*cubeY,
                                     g*cubeZ:(g+1)*cubeZ]
-                        counts = np.histogram(img, nrBins)
+                        counts = np.histogram(img, rangeH, nrBins)
                         X_new[i, (g+f*cut+e*cut*cut)*nrBins:
                               (g+f*cut+e*cut*cut+1)*nrBins] = counts[0]
         return X_new

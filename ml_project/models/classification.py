@@ -117,13 +117,17 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         return self
 
     def score(self, X, y, sample_weight=None):
-        return stats.spearmanr(y)
+        y_p=np.empty((X.shape[0],4));
+        for e in range(0,self.nrClassifiers):
+            predicted = self.classifiers[e].predict_proba(X)
+            y_p = y + predicted
+        y_p = y_p/self.nrClassifiers;
+        return stats.spearmanr(y,y_p)
 
     def predict_proba(self, X):
         y=np.empty((X.shape[0],4));
         for e in range(0,self.nrClassifiers):
             predicted = self.classifiers[e].predict_proba(X)
-            print(predicted[0])
             y = y + predicted
         return y/self.nrClassifiers;
     
