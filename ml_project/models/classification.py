@@ -59,13 +59,14 @@ import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_array, check_is_fitted
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.svm import SVC
 from scipy import stats
 import random
 import sys
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self):
-        self.lda=LinearDiscriminantAnalysis()
+        self.lda=SVC()
 
     def maxIndexWithSampling(y):
         chosenIndices = np.empty((y.shape[0],1))
