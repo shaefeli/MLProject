@@ -91,7 +91,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def fit(self, X, y, sample_weight=None):
         print("START FITTING")
         sys.stdout.flush();
-        chosenIndices = argmax(y)
+        chosenIndices = np.argmax(y)
         self.lda.fit(X, chosenIndices)
         return self
 
