@@ -66,7 +66,7 @@ import sys
 
 class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def __init__(self):
-        self.lda=SVC()
+        self.lda=SVC(probability=True)
 
     def maxIndexWithSampling(y):
         chosenIndices = np.empty((y.shape[0],1))
