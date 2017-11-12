@@ -111,7 +111,6 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
                         chosenIndices[i] = j
                         break
             np.ravel(chosenIndices)
-            print(e)
             sys.stdout.flush();
             ldaToFit = self.classifiers[e]
             ldaToFit.fit(X, chosenIndices)
@@ -123,7 +122,9 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
     def predict_proba(self, X):
         y=np.empty((X.shape[0],4));
         for e in range(0,self.nrClassifiers):
-            y = y + self.classifiers[e].predict_proba(X)
+            predicted = self.classifiers[e].predict_proba(X)
+            print(predicted[0])
+            y = y + predicted
         return y/self.nrClassifiers;
     
 
