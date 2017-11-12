@@ -129,7 +129,7 @@ class LDAwithYHandling(BaseEstimator, TransformerMixin):
         for i in range(0,n_samples):
             correla,_=stats.spearmanr(y[i],y_p[i])
             correl = correl+correla
-        return correl/nr_samples
+        return correl/n_samples
 
     def predict_proba(self, X):
         y=np.empty((X.shape[0],4));
