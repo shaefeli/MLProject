@@ -60,7 +60,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_array, check_is_fitted
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.svm import SVC
-from sklean.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier
 from scipy import stats
 import random
 import sys
